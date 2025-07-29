@@ -3,5 +3,10 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
-    ]
+    ],
+    "code-runner.executorMap": {
+        "java": "cd $workspaceRoot && javac -d bin src/$fileName && java -cp bin $fileNameWithoutExt"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true
 }
