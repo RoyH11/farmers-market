@@ -67,21 +67,12 @@ public class Stand {
     // toString method
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Stand: ").append(name);
-
-        if (hasFarmer()) {
-            sb.append(", Farmer: ").append(farmer.getName());
-        } else {
-            sb.append(", No Farmer Assigned");
-        }
-
-        if (hasProduce()) {
-            sb.append(", Produce: ").append(produceList);
-        } else {
-            sb.append(", No Produce Available");
-        }
-
-        return sb.toString();
+        String farmerInfo = hasFarmer() ? farmer.getName() : "No Farmer";
+        String produceInfo = hasProduce() ? produceList.toString() : "No Produce";
+        
+        return String.format("%-30s %-20s %s", 
+            "Stand: " + name, 
+            "Farmer: " + farmerInfo, 
+            "Produce: " + produceInfo);
     }
 }
