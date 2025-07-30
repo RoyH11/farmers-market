@@ -9,22 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stand {
+    private final String name; 
     private Farmer farmer;
     private final List<Produce> produceList;
 
     // constructor - empty stand
-    public Stand() {
+    public Stand(String name) {
+        this.name = name;
         this.farmer = null; 
         this.produceList = new ArrayList<>(); 
     }
 
     // constructor - with a farmer
-    public Stand(Farmer farmer) {
+    public Stand(String name, Farmer farmer) {
+        this.name = name;
         this.farmer = farmer;
         this.produceList = new ArrayList<>();
     }
 
     // getters
+    public String getName() {
+        return name;
+    }
+
     public Farmer getFarmer() {
         return farmer;
     }
@@ -54,5 +61,26 @@ public class Stand {
 
     public boolean hasProduce() {
         return !produceList.isEmpty();
+    }
+
+    // toString method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Stand: ").append(name);
+
+        if (hasFarmer()) {
+            sb.append(", Farmer: ").append(farmer.getName());
+        } else {
+            sb.append(", No Farmer Assigned");
+        }
+
+        if (hasProduce()) {
+            sb.append(", Produce: ").append(produceList);
+        } else {
+            sb.append(", No Produce Available");
+        }
+
+        return sb.toString();
     }
 }

@@ -19,25 +19,38 @@ public class StandTest {
     public void setUp() {
         farmer1 = new Farmer("Alice");
         farmer2 = new Farmer("Bob");
-        emptyStand = new Stand();
-        standWithFarmer = new Stand(farmer2);
+        emptyStand = new Stand("Empty Stand");
+        standWithFarmer = new Stand("Stand With Farmer", farmer2);
     }
 
     @Test
     public void testEmptyStandCreation() {
         assertNotNull(emptyStand);
-        assertFalse(emptyStand.hasFarmer());
-        assertFalse(emptyStand.hasProduce());
     }
 
     @Test
     public void testStandWithFarmerCreation() {
         assertNotNull(standWithFarmer);
-        assertTrue(standWithFarmer.hasFarmer());
-        assertEquals(farmer2, standWithFarmer.getFarmer());
-        assertFalse(standWithFarmer.hasProduce());
     }
 
+    @Test
+    public void testGetName() {
+        assertEquals("Empty Stand", emptyStand.getName());
+        assertEquals("Stand With Farmer", standWithFarmer.getName());
+    }
+
+    @Test
+    public void testGetFarmer() {
+        assertNull(emptyStand.getFarmer());
+        assertEquals(farmer2, standWithFarmer.getFarmer());
+    }
+
+    @Test
+    public void testGetProduceList() {
+        assertTrue(emptyStand.getProduceList().isEmpty());
+        assertTrue(standWithFarmer.getProduceList().isEmpty());
+    }
+    
     @Test
     public void testSetFarmer() {
         emptyStand.setFarmer(farmer1);
