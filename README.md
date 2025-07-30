@@ -1,6 +1,25 @@
-# farmers-market
+# Farmers Market Inventory System
 
-This repo is for the Elliot Electric Supply coding interview. Take home deadline is Friday, August 1, 2025.
+## About 
+
+This is a small OOP-focused Java project simulating a farmers market with multiple stands and produce management. It demonstrates class relationships, unit testing with JUnit 5, and basic inventory logic.
+
+
+## Requirements
+
+### Design and code a class system that represents produce available at a farmer’s market. There should be at least 5 varieties of fruit or vegetables that are sold overall.
+
+- A farmer’s market has different stands
+    - Each stand has a farmer
+    - Each stand has a supply of fruits and vegetables.
+- The classes should allow a user to build a farmer’s market and create a certain number of stands.
+    - Then a user can assign a farmer and fruit/vegetables to a stand
+- It also allows you to access each farmer and their list of produce.
+
+### Bonus
+
+- The market has search capabilities to find a specific piece of produce and return a list of Farmers providing along with their location in the market.
+- Buying produce reduces counts, which are then reflected accurately in the search.
 
 ## Environment Setup
 
