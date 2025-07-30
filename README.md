@@ -19,3 +19,5 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
 - 7/30/2025 11:20 am implemented Farmer class, added Test unit for Farmer class
 
 - 7/30/2025 12:00 pm implemented Stand class, added Test unit for Stand class
+
+- 7/30/2025 12:30 pm refactored Stand toString method, Produce toString method, and their respective test units
