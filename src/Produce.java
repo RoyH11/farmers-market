@@ -1,3 +1,9 @@
+/**
+ * @author Roy Huang
+ * @date July 29, 2025
+ * @version 1.0
+ */
+
 public abstract class Produce {
 	protected String name;
 	protected double price;
@@ -5,7 +11,6 @@ public abstract class Produce {
 	protected String type;
 
 	// constructor
-
 	public Produce(String name, double price, int quantity, String type) {
 		this.name = name;
 		this.price = price;
