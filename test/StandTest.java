@@ -122,4 +122,23 @@ public class StandTest {
         assertEquals(1, standWithFarmer.getProduceList().size());
         assertEquals(lettuce, standWithFarmer.getProduceList().get(0));
     }
+
+    @Test
+    public void testToString() {
+        assertEquals("Stand: Empty Stand, No Farmer Assigned, No Produce Available", emptyStand.toString());
+        assertEquals("Stand: Stand With Farmer, Farmer: Bob, No Produce Available", standWithFarmer.toString());
+
+        emptyStand.setFarmer(farmer1);
+        assertEquals("Stand: Empty Stand, Farmer: Alice, No Produce Available", emptyStand.toString());
+
+        Produce apple = new Apple(1.50, 10);
+        emptyStand.addProduce(apple);
+        assertEquals("Stand: Empty Stand, Farmer: Alice, Produce: [Apple - $1.50 (10)]", emptyStand.toString());
+
+        Produce carrot = new Carrot(2.00, 20);
+        Produce lettuce = new Lettuce(2.50, 30);
+        standWithFarmer.addProduce(carrot);
+        standWithFarmer.addProduce(lettuce);
+        assertEquals("Stand: Stand With Farmer, Farmer: Bob, Produce: [Carrot - $2.00 (20), Lettuce - $2.50 (30)]", standWithFarmer.toString());
+    }
 }

@@ -47,7 +47,7 @@ public abstract class Produce {
 	// toString method
 	@Override
 	public String toString() {
-		return String.format("%s - $%.2f per unit (%d units available)", 
+		return String.format("%s - $%.2f (%d)", 
 			name, price, quantity);
 	}
 
