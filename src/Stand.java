@@ -7,6 +7,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import produce.*;
 
 public class Stand {
     private final String name; 
