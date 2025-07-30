@@ -40,3 +40,10 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
 - 7/30/2025 12:00 pm implemented Stand class, added Test unit for Stand class
 
 - 7/30/2025 12:30 pm refactored Stand toString method, Produce toString method, and their respective test units
+
+- 7/30/2025 2:30 pm implemented Market class, added Test unit for Market class
+
+- 7/30/2025 3:00 pm refactored all produce classes and the abstract Produce class to a package `produce`, reran all tests
+
+- 7/30/2025 3:30 pm implemented App class with main method, added displayMarket method to print market information
+
