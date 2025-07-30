@@ -9,5 +9,4 @@ public class Tomato extends Produce{
         super("Tomato", price, quantity, "Vegetable");
     }
 
-    
 }

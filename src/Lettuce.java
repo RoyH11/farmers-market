@@ -9,6 +9,4 @@ public class Lettuce extends Produce {
         super("Lettuce", price, quantity, "Vegetable");
     }
 
-    
-    
 }

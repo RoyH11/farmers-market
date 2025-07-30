@@ -9,6 +9,4 @@ public class Orange extends Produce {
         super("Orange", price, quantity, "Fruit");
     }
 
-    
-    
 }
