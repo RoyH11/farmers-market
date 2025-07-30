@@ -3,8 +3,4 @@ public class Apple extends Produce {
         super("Apple", price, quantity, "Fruit");
     }
 
-    @Override
-    public String getDescription() {
-        return "Fresh, crisp apples - perfect for snacking";
-    }
 }

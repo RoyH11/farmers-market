@@ -39,9 +39,6 @@ public abstract class Produce {
 		}
 	}
 
-	// abstract method - each produce type will implement its own description
-	public abstract String getDescription();
-
 	// toString method
 	@Override
 	public String toString() {

@@ -3,9 +3,6 @@ public class Lettuce extends Produce {
         super("Lettuce", price, quantity, "Vegetable");
     }
 
-    @Override
-    public String getDescription() {
-        return "Fresh, crisp lettuce - perfect for salads and sandwiches";
-    }
+    
     
 }

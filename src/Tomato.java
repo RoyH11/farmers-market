@@ -3,8 +3,5 @@ public class Tomato extends Produce{
         super("Tomato", price, quantity, "Vegetable");
     }
 
-    @Override
-    public String getDescription() {
-        return "Ripe, juicy tomatoes - great for salads";
-    }
+    
 }
