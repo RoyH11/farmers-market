@@ -17,3 +17,5 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
 - 7/29/2025 7:45 pm implemented test unit for Produce class, and the concrete produce classes
 
 - 7/30/2025 11:20 am implemented Farmer class, added Test unit for Farmer class
+
+- 7/30/2025 12:00 pm implemented Stand class, added Test unit for Stand class
