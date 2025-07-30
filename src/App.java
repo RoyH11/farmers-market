@@ -8,7 +8,11 @@ import produce.*;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("=== Welcome to the Farmers Market App ===\n");
+        System.out.println("""
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                           << Welcome to the Farmers Market App >>
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                           """);
 
         // create the market
         Market market = new Market();
@@ -45,14 +49,16 @@ public class App {
     }
 
     public static void displayMarket(Market market) {
-        System.out.println("=== Market Overview ===");
+        System.out.println("Market Overview");
+                
         if (market.hasStands()) {
-            for (Stand stand : market.getAllStands()) {
-                System.out.println(stand);
+            for (int i = 0; i < market.getAllStands().size(); i++) {
+                Stand stand = market.getStand(i);
+                System.out.println((i + 1) + ". " + stand);
             }
         } else {
             System.out.println("No stands available in the market.");
         }
-        System.out.println("========================\n");
+        System.out.println("\n");
     }
 }
