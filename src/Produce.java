@@ -7,10 +7,10 @@ public abstract class Produce {
 	// constructor
 
 	public Produce(String name, double price, int quantity, String type) {
-	this.name = name;
-	this.price = price;
-	this.quantity = quantity;
-	this.type = type;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.type = type;
 	}
 
 	// getters
