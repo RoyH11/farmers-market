@@ -12,8 +12,8 @@ public class App {
 
     public static void main(String[] args) {
         // Welcome message
+        System.out.println();
         System.out.println("""
-                            \n
                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                             << WELCOME TO THE FARMERS MARKET APP >>
                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,14 +28,23 @@ public class App {
             running = showMainMenu();
         }
 
+        // Close the scanner
         Util.closeScanner();
-        System.out.println("Thank you for visiting the Farmers Market!");
+
+        // Exit message
+        System.out.println();
+        System.out.println("""
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                            << Good Bye! Thank you for visiting the Farmers Market! >>
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                            """);
 
     }
 
     public static boolean showMainMenu() {
+        System.out.println();
         System.out.println( """
-                            \n=== FARMERS MARKET MENU ===
+                            === FARMERS MARKET MENU ===
                             1. View Farmers Market
                             2. Create New Stand
                             0. Exit
@@ -49,14 +58,17 @@ public class App {
             case 0 -> {
                 return false; // exist the program
             }
-            default -> System.out.println("Invalid choice. Please enter 0-2.");
+            default -> {
+                return true; // should not reach here, but just in case
+            }
         }    
             
         return true; // continue running
     }
 
     public static void createNewStand() {
-        System.out.println("\n=== CREATE NEW STAND ===");
+        System.out.println();
+        System.out.println("=== CREATE NEW STAND ===");
 
         // get stand name
         String standName = Util.getStringInput("Enter stand name: ");
@@ -74,12 +86,15 @@ public class App {
         // add stand to market
         market.addStand(stand);
 
-        System.out.println("Stand created successfully!");
+        // display success message
+        System.out.println();
+        System.out.println("=== Stand created successfully! ===");
         System.out.println("New stand: " + stand);
     }
 
     public static void addProduceToStand(Stand stand) {
-        System.out.println("\n=== ADD PRODUCE TO STAND ===");
+        System.out.println();
+        System.out.println("=== ADD PRODUCE TO STAND ===");
         boolean addingProduce = true;
         while (addingProduce) {
             System.out.println("""
@@ -154,7 +169,8 @@ public class App {
     }
 
     public static void displayMarket(Market market) {
-        System.out.println("Market Overview");
+        System.out.println();
+        System.out.println("=== Market Overview ===");
                 
         if (market.hasStands()) {
             for (int i = 0; i < market.getAllStands().size(); i++) {
@@ -164,6 +180,5 @@ public class App {
         } else {
             System.out.println("No stands available in the market.");
         }
-        System.out.println("\n");
     }
 }
