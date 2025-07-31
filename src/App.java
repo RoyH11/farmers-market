@@ -13,11 +13,13 @@ public class App {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        // Welcome message
         System.out.println("""
-                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                           << WELCOME TO THE FARMERS MARKET APP >>
-                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                           """);
+                            \n
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                            << WELCOME TO THE FARMERS MARKET APP >>
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                            """);
 
         // initialize with some sample data
         initializeSampleMarket();
@@ -29,6 +31,7 @@ public class App {
         }
 
         scanner.close();
+        Util.closeScanner();
         System.out.println("Thank you for visiting the Farmers Market!");
 
     }
@@ -38,29 +41,22 @@ public class App {
                             \n=== FARMERS MARKET MENU ===
                             1. View Farmers Market
                             2. Create New Stand
-                            3. Exit
+                            0. Exit
                             """);
-        System.out.print("Enter your choice (1-3): ");
+        System.out.print("Enter your choice (0-2): ");
 
-        try {
-            int choice = Integer.parseInt(scanner.nextLine().trim());
+        
+        int choice = Integer.parseInt(scanner.nextLine().trim());
 
-            switch (choice) {
-                case 1: 
-                    displayMarket(market);
-                    break;
-                case 2:
-                    createNewStand();
-                    break;
-                case 3:
-                    return false; // exist the program
-                default: 
-                    System.out.println("Invalid choice. Please enter 1-3.");    
+        switch (choice) {
+            case 1 -> displayMarket(market);
+            case 2 -> createNewStand();
+            case 0 -> {
+                return false; // exist the program
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a whole number 1-3.");
-        }
-
+            default -> System.out.println("Invalid choice. Please enter 0-2.");
+        }    
+            
         return true; // continue running
     }
 
@@ -68,8 +64,7 @@ public class App {
         System.out.println("\n=== CREATE NEW STAND ===");
 
         // get stand name
-        System.out.print("Enter stand name: ");
-        String standName = scanner.nextLine().trim();
+        String standName = Util.getStringInput("Enter stand name: ");
 
         if (standName.isEmpty()) {
             System.out.println("Stand name cannont be empty.");
@@ -77,8 +72,7 @@ public class App {
         }
 
         // get farmer name
-        System.out.print("Enter farmer name: ");
-        String farmerName = scanner.nextLine().trim();
+        String farmerName = Util.getStringInput("Enter farmer name: ");
 
         if (farmerName.isEmpty()) {
             System.out.println("Farmer name cannot be empty.");
