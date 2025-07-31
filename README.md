@@ -48,3 +48,5 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
 - 7/30/2025 3:30 pm implemented App class with main method, added displayMarket method to print market information
 
 - 7/31/2025 9:45 am added user interaction with the app, view market info, create a stand with farmer but no produce functionality yet, and exit
+
+- 7/31/2025 12:00 pm user can now add produce to a new stand
