@@ -4,13 +4,11 @@
  * @version 1.0
  */
 
-import java.util.Scanner;
 import produce.*;
 
 public class App {
 
     private static Market market = new Market();
-    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Welcome message
@@ -30,7 +28,6 @@ public class App {
             running = showMainMenu();
         }
 
-        scanner.close();
         Util.closeScanner();
         System.out.println("Thank you for visiting the Farmers Market!");
 
@@ -43,10 +40,8 @@ public class App {
                             2. Create New Stand
                             0. Exit
                             """);
-        System.out.print("Enter your choice (0-2): ");
-
         
-        int choice = Integer.parseInt(scanner.nextLine().trim());
+        int choice = Util.getIntInput("Enter your choice (0-2): ", 0, 2);
 
         switch (choice) {
             case 1 -> displayMarket(market);
@@ -66,19 +61,9 @@ public class App {
         // get stand name
         String standName = Util.getStringInput("Enter stand name: ");
 
-        if (standName.isEmpty()) {
-            System.out.println("Stand name cannont be empty.");
-            return;
-        }
-
         // get farmer name
         String farmerName = Util.getStringInput("Enter farmer name: ");
-
-        if (farmerName.isEmpty()) {
-            System.out.println("Farmer name cannot be empty.");
-            return;
-        }
-
+        
         // create farmer and stand
         Farmer farmer = new Farmer(farmerName);
         Stand stand = new Stand(standName, farmer);
@@ -106,45 +91,26 @@ public class App {
                     5. Tomato
                     0. Done adding produce
                     """);
-            System.out.print("Select produce type (0-5): ");
 
-            try {
-                int choice = Integer.parseInt(scanner.nextLine().trim());
+            // get user choice, validation handled in Util
+            int choice = Util.getIntInput("Select produce type (0-5): ", 0, 5);
 
-                // done
-                if (choice == 0) {
-                    addingProduce = false; // done adding produce
-                    continue;
-                }
-
-                // out of range
-                if (choice < 1 || choice > 5) {
-                    System.out.println("Invalid choice. Please enter 0-5.");
-                    continue;
-                }
-
-                // get price and quantity
-                System.out.print("Enter price per unit ($): ");
-                double price = Double.parseDouble(scanner.nextLine().trim());
-
-                System.out.print("Enter quantity: ");
-                int quantity = Integer.parseInt(scanner.nextLine().trim());
-
-                if (price <= 0 || quantity <= 0) {
-                    System.out.println("Price and quantity must be positive.");
-                    continue;
-                }
-
-                // create produce 
-                Produce produce = createProduce(choice, price, quantity);
-                if (produce != null) {
-                    stand.addProduce(produce);
-                    System.out.println("Added " + produce.getName() + " to the stand.");
-                }
-                
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+            // done
+            if (choice == 0) {
+                addingProduce = false; // done adding produce
+                continue;
             }
+
+            // get price and quantity, validation handled in Util
+            double price = Util.getDoubleInput("Enter price per unit ($): ", 0.0, 99.99);
+
+            int quantity = Util.getIntInput("Enter quantity: ", 0, 999);
+
+            // create produce 
+            Produce produce = createProduce(choice, price, quantity);
+            stand.addProduce(produce);
+            System.out.println("Added " + produce.getName() + " to the stand.");
+                
         }
     }
 
