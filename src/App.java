@@ -90,13 +90,79 @@ public class App {
         Stand stand = new Stand(standName, farmer);
 
         // add produce to stand
-        // addProduceToStand(stand);
+        addProduceToStand(stand);
 
         // add stand to market
         market.addStand(stand);
 
         System.out.println("Stand created successfully!");
         System.out.println("New stand: " + stand);
+    }
+
+    public static void addProduceToStand(Stand stand) {
+        System.out.println("\n=== ADD PRODUCE TO STAND ===");
+        boolean addingProduce = true;
+        while (addingProduce) {
+            System.out.println("""
+                    Available produce types:
+                    1. Apple
+                    2. Orange
+                    3. Carrot
+                    4. Lettuce
+                    5. Tomato
+                    0. Done adding produce
+                    """);
+            System.out.print("Select produce type (0-5): ");
+
+            try {
+                int choice = Integer.parseInt(scanner.nextLine().trim());
+
+                // done
+                if (choice == 0) {
+                    addingProduce = false; // done adding produce
+                    continue;
+                }
+
+                // out of range
+                if (choice < 1 || choice > 5) {
+                    System.out.println("Invalid choice. Please enter 0-5.");
+                    continue;
+                }
+
+                // get price and quantity
+                System.out.print("Enter price per unit ($): ");
+                double price = Double.parseDouble(scanner.nextLine().trim());
+
+                System.out.print("Enter quantity: ");
+                int quantity = Integer.parseInt(scanner.nextLine().trim());
+
+                if (price <= 0 || quantity <= 0) {
+                    System.out.println("Price and quantity must be positive.");
+                    continue;
+                }
+
+                // create produce 
+                Produce produce = createProduce(choice, price, quantity);
+                if (produce != null) {
+                    stand.addProduce(produce);
+                    System.out.println("Added " + produce.getName() + " to the stand.");
+                }
+                
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    public static Produce createProduce(int choice, double price, int quantity) {
+        return switch (choice) {
+            case 1 -> new Apple(price, quantity);
+            case 2 -> new Orange(price, quantity);
+            case 3 -> new Carrot(price, quantity);
+            case 4 -> new Lettuce(price, quantity);
+            case 5 -> new Tomato(price, quantity);
+            default -> null; // should not reach here, but just in case
+        }; 
     }
 
     public static void initializeSampleMarket() {
