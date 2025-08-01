@@ -88,3 +88,10 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
 - 7/31 11:00 pm 
     - implemented stand removal by index, added test cases for stand removal 
     - beautified invalid user input feedback
+
+- 8/1 TODO: 
+    - implement visit a stand functionality
+        - add produce to a stand
+        - remove produce from a stand
+    - implement search for produce functionality
+    
