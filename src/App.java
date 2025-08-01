@@ -307,6 +307,8 @@ public class App {
         }
     }
 
+    // add/stock and remove/purchase functions (without userinteraction) ================================================================================================
+
 
     public static void addProduceToStand(Stand stand) {
         
