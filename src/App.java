@@ -4,6 +4,7 @@
  * @version 1.0
  */
 
+import java.util.List;
 import produce.*;
 
 public class App {
@@ -220,7 +221,10 @@ public class App {
             stand.addProduce(produce);
             System.out.println();
             System.out.println("Added " + produce.getName() + " to the stand.");
-            System.out.println("Current produce in the stand: " + produce);
+
+            // display current produce in the stand
+            List<Produce> currentProduces = stand.getProduceList();
+            System.out.println("Current produce in the stand: " + currentProduces);
             System.out.println();
         }
     }
