@@ -1,3 +1,8 @@
+/**
+ * @author Roy Huang
+ * @date Aug 1st, 2025
+ * @version 1.0
+ */
 
 import java.util.Scanner;
 import produce.Apple;
