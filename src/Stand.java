@@ -73,6 +73,15 @@ public class Stand {
         return !produceList.isEmpty();
     }
 
+    public Produce findProduceByName(String name) {
+        for (Produce item : produceList) {
+            if (item.getName().equalsIgnoreCase(name)) {
+                return item; // found the produce
+            }
+        }
+        return null; // not found
+    }
+
     // toString method
     @Override
     public String toString() {

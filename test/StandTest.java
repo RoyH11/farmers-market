@@ -125,6 +125,23 @@ public class StandTest {
         assertEquals(lettuce, standWithFarmer.getProduceList().get(0));
     }
 
+    @Test
+    public void testFindProduceByName() {
+        emptyStand.setFarmer(farmer1);
+        Produce apple = new Apple(1.50, 10);
+        emptyStand.addProduce(apple);
+        assertEquals(apple, emptyStand.findProduceByName("Apple"));
+        assertNull(emptyStand.findProduceByName("Banana"));
+
+        Produce carrot = new Carrot(2.00, 20);
+        Produce lettuce = new Lettuce(2.50, 30);
+        standWithFarmer.addProduce(carrot);
+        standWithFarmer.addProduce(lettuce);
+        assertEquals(carrot, standWithFarmer.findProduceByName("Carrot"));
+        assertEquals(lettuce, standWithFarmer.findProduceByName("Lettuce"));
+        assertNull(standWithFarmer.findProduceByName("Potato"));
+    }
+
     // toString tests passed initially
     // removed during terminal output modification
     // reason: maintaining toString tests is way too tedious

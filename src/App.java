@@ -289,7 +289,7 @@ public class App {
         // search through all stands
         for (int i = 0; i < market.getAllStands().size(); i++) {
             Stand stand = market.getStand(i);
-            Produce produce = findProduceByName(stand, produceName);
+            Produce produce = stand.findProduceByName(produceName);
 
             // only display if produce is found
             if (produce != null) {
@@ -337,7 +337,7 @@ public class App {
 
             // check if produce is already in the stand
             String produceName = getProduceName(choice);
-            Produce existingProduce = findProduceByName(stand, produceName);
+            Produce existingProduce = stand.findProduceByName(produceName);
 
             // if produce already exists, just show the existing produce
             if (existingProduce != null) {
@@ -436,15 +436,7 @@ public class App {
         };
     }
 
-    public static Produce findProduceByName(Stand stand, String name) {
-        for (Produce item : stand.getProduceList()) {
-            if (item.getName().equalsIgnoreCase(name)) {
-                return item; // found existing produce
-            }
-        }
-        return null; // not found
-    }
-
+    
     public static Produce createProduce(int choice, double price, int quantity) {
         return switch (choice) {
             case 1 -> new Apple(price, quantity);
