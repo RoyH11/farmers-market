@@ -89,6 +89,10 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
     - implemented stand removal by index, added test cases for stand removal 
     - beautified invalid user input feedback
 
+- 8/1 1:00 pm 
+    - implemented produce search functionality
+    - standardized terminal output for better user experience (println before each menu/output)
+
 - 8/1 TODO: 
     - implement visit a stand functionality
         - add produce to a stand
