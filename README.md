@@ -85,15 +85,15 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
 - 7/31/2025 10:30 pm 
     - scaffolded stand removal, visit a stand, and search for produce functionality
 
-- 7/31 11:00 pm 
+- 7/31/2025 11:00 pm 
     - implemented stand removal by index, added test cases for stand removal 
     - beautified invalid user input feedback
 
-- 8/1 1:00 pm 
+- 8/1/2025 1:00 pm 
     - implemented produce search functionality
     - standardized terminal output for better user experience (println before each menu/output)
 
-- 8/1 2:40 pm 
+- 8/1/2025 2:40 pm 
     - implemented visit a stand functionality
         - view produce in a stand
         - add / stock produce in a stand
