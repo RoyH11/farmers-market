@@ -116,6 +116,18 @@ public class App {
                 continue;
             }
 
+            // check if produce is already in the stand
+            String produceName = getProduceName(choice);
+            Produce existingProduce = findProduceByName(stand, produceName);
+
+            // if produce already exists, just show the existing produce
+            if (existingProduce != null) {
+                System.out.println();
+                System.out.println("Produce already exists in the stand: " + existingProduce);
+                System.out.println();
+                continue; // skip to next iteration
+            }
+
             // get price and quantity, validation handled in Util
             double price = Util.getDoubleInput("Enter price per unit ($): ", 0.0, 99.99);
 
@@ -124,9 +136,31 @@ public class App {
             // create produce 
             Produce produce = createProduce(choice, price, quantity);
             stand.addProduce(produce);
+            System.out.println();
             System.out.println("Added " + produce.getName() + " to the stand.");
-                
+            System.out.println("Current produce in the stand: " + produce);
+            System.out.println();
         }
+    }
+
+    public static String getProduceName(int choice) {
+        return switch (choice) {
+            case 1 -> "Apple";
+            case 2 -> "Orange";
+            case 3 -> "Carrot";
+            case 4 -> "Lettuce";
+            case 5 -> "Tomato";
+            default -> null; // should not reach here, but just in case
+        };
+    }
+
+    public static Produce findProduceByName(Stand stand, String name) {
+        for (Produce item : stand.getProduceList()) {
+            if (item.getName().equalsIgnoreCase(name)) {
+                return item; // found existing produce
+            }
+        }
+        return null; // not found
     }
 
     public static Produce createProduce(int choice, double price, int quantity) {
