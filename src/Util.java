@@ -1,5 +1,11 @@
 
 import java.util.Scanner;
+import produce.Apple;
+import produce.Carrot;
+import produce.Lettuce;
+import produce.Orange;
+import produce.Produce;
+import produce.Tomato;
 
 public class Util {
     private static final Scanner scanner = new Scanner(System.in);
@@ -55,6 +61,36 @@ public class Util {
     public static void closeScanner() {
         if (scanner != null) {
             scanner.close();
+        }
+    }
+
+    public static String getProduceName(int choice) {
+        return switch (choice) {
+            case 1 -> "Apple";
+            case 2 -> "Orange";
+            case 3 -> "Carrot";
+            case 4 -> "Lettuce";
+            case 5 -> "Tomato";
+            default -> null; // should not reach here, but just in case
+        };
+    }
+
+    
+    public static Produce createProduce(int choice, double price, int quantity) {
+        return switch (choice) {
+            case 1 -> new Apple(price, quantity);
+            case 2 -> new Orange(price, quantity);
+            case 3 -> new Carrot(price, quantity);
+            case 4 -> new Lettuce(price, quantity);
+            case 5 -> new Tomato(price, quantity);
+            default -> null; // should not reach here, but just in case
+        }; 
+    }
+
+    public static void displayAllStands(Market market) {
+        for (int i = 0; i < market.getAllStands().size(); i++) {
+            Stand stand = market.getStand(i);
+            System.out.println((i + 1) + ". " + stand);
         }
     }
 }

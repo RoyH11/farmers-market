@@ -110,7 +110,7 @@ public class App {
                 
         // display all stands
         if (market.hasStands()) {
-            displayAllStands(market);
+            Util.displayAllStands(market);
         } else {
             System.out.println("No stands available in the market.");
         }
@@ -159,7 +159,7 @@ public class App {
         }
 
         // display all stands
-        displayAllStands(market);
+        Util.displayAllStands(market);
         System.out.println("0. Cancel removal");
         System.out.println("======================");
 
@@ -192,7 +192,7 @@ public class App {
 
             if (market.hasStands()) {
                 // display all stands
-                displayAllStands(market);
+                Util.displayAllStands(market);
                 System.out.println("0. Exit visit");
                 System.out.println("=====================");
             } else {
@@ -273,7 +273,7 @@ public class App {
             }
 
             // get produce name
-            String produceName = getProduceName(choice);
+            String produceName = Util.getProduceName(choice);
 
             // desplay search results
             displaySearchResults(produceName);
@@ -336,7 +336,7 @@ public class App {
             }
 
             // check if produce is already in the stand
-            String produceName = getProduceName(choice);
+            String produceName = Util.getProduceName(choice);
             Produce existingProduce = stand.findProduceByName(produceName);
 
             // if produce already exists, just show the existing produce
@@ -360,7 +360,7 @@ public class App {
                 int quantity = Util.getIntInput("Enter quantity: ", 0, 999);
 
                 // create produce 
-                Produce produce = createProduce(choice, price, quantity);
+                Produce produce = Util.createProduce(choice, price, quantity);
                 stand.addProduce(produce);
                 System.out.println();
                 System.out.println("<<< Added " + produce.getName() + " to the stand! >>>");
@@ -425,35 +425,7 @@ public class App {
         }
     }
 
-    public static String getProduceName(int choice) {
-        return switch (choice) {
-            case 1 -> "Apple";
-            case 2 -> "Orange";
-            case 3 -> "Carrot";
-            case 4 -> "Lettuce";
-            case 5 -> "Tomato";
-            default -> null; // should not reach here, but just in case
-        };
-    }
-
     
-    public static Produce createProduce(int choice, double price, int quantity) {
-        return switch (choice) {
-            case 1 -> new Apple(price, quantity);
-            case 2 -> new Orange(price, quantity);
-            case 3 -> new Carrot(price, quantity);
-            case 4 -> new Lettuce(price, quantity);
-            case 5 -> new Tomato(price, quantity);
-            default -> null; // should not reach here, but just in case
-        }; 
-    }
-
-    public static void displayAllStands(Market market) {
-        for (int i = 0; i < market.getAllStands().size(); i++) {
-            Stand stand = market.getStand(i);
-            System.out.println((i + 1) + ". " + stand);
-        }
-    }
 
     
 }
