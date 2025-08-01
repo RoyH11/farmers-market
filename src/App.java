@@ -8,7 +8,7 @@ import produce.*;
 
 public class App {
 
-    private static Market market = new Market();
+    private static final Market market = new Market();
 
     public static void main(String[] args) {
         // Welcome message
@@ -236,12 +236,12 @@ public class App {
                 case 2 -> removeProduceFromStand(stand);
                 case 0 -> {
                     interacting = false; // exit interaction
-                    continue;
                 }
+
                 default -> {
                     interacting = false; // should not reach here, but just in case
-                    continue;
                 }
+
             }
         }
     }
