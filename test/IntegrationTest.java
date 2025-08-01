@@ -68,4 +68,5 @@ public class IntegrationTest {
         assertTrue("Charlie".equals(stand3.getFarmer().getName()));
     }
 
+    
 }

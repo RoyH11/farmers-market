@@ -108,11 +108,9 @@ public class App {
         System.out.println();
         System.out.println("=== Market Overview ===");
                 
+        // display all stands
         if (market.hasStands()) {
-            for (int i = 0; i < market.getAllStands().size(); i++) {
-                Stand stand = market.getStand(i);
-                System.out.println((i + 1) + ". " + stand);
-            }
+            displayAllStands(market);
         } else {
             System.out.println("No stands available in the market.");
         }
@@ -161,10 +159,7 @@ public class App {
         }
 
         // display all stands
-        for (int i = 0; i < market.getAllStands().size(); i++) {
-            Stand stand = market.getStand(i);
-            System.out.println((i + 1) + ". " + stand);
-        }
+        displayAllStands(market);
         System.out.println("0. Cancel removal");
         System.out.println("======================");
 
@@ -196,10 +191,8 @@ public class App {
             System.out.println("=== VISIT A STAND ===");
 
             if (market.hasStands()) {
-                for (int i = 0; i < market.getAllStands().size(); i++) {
-                    Stand stand = market.getStand(i);
-                    System.out.println((i + 1) + ". " + stand);
-                }
+                // display all stands
+                displayAllStands(market);
                 System.out.println("0. Exit visit");
                 System.out.println("=====================");
             } else {
@@ -461,6 +454,13 @@ public class App {
             case 5 -> new Tomato(price, quantity);
             default -> null; // should not reach here, but just in case
         }; 
+    }
+
+    public static void displayAllStands(Market market) {
+        for (int i = 0; i < market.getAllStands().size(); i++) {
+            Stand stand = market.getStand(i);
+            System.out.println((i + 1) + ". " + stand);
+        }
     }
 
     
