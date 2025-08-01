@@ -29,7 +29,7 @@ This is a small OOP-focused Java project simulating a farmers market with multip
 
 2. Java version requirement
 
-    This project is developed using **Java 21**. I recommend using at least **Java 17** or higher to ensure compatibility with the features used in this project. For java installation, you can use Adoptium from this [link](https://adoptium.net/temurin/releases/?version=17), or any other Java distribution of your choice.
+    This project is developed using ***Java 21***. I recommend using at least ***Java 17*** or higher to ensure compatibility with the features used in this project. For java installation, you can use Adoptium from this [link](https://adoptium.net/temurin/releases/?version=17), or any other Java distribution of your choice.
     
 3. The `test.sh` script runs the JUnit tests. 
 
@@ -137,3 +137,8 @@ This is a small OOP-focused Java project simulating a farmers market with multip
 
 - 8/1/2025 3:45 pm 
     - refactored findProduceByName method to Stand class
+
+- 8/1/2025 4:00 pm
+    - refactored some minor details in Util class
+    - formatted README.md 
+    - done
