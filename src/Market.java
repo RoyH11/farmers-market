@@ -36,10 +36,19 @@ public class Market {
     }
 
     public void removeStand(Stand stand) {
+        // remove by reference
         if (stand == null || !stands.contains(stand)) {
-            return; // Stand not found
+            return; // nothing to remove
         }
         stands.remove(stand);
+    }
+
+    public void removeStand(int index) {
+        // remove by index
+        if ( index < 0 || index >= stands.size()) {
+            return; // nothing to remove
+        }
+        stands.remove(index);
     }
 
     public void testRemoveAllStands() {

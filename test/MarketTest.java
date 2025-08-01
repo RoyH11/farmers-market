@@ -64,6 +64,16 @@ public class MarketTest {
     }
 
     @Test
+    public void testRemoveStandByIndex() {
+        market.addStand(stand1);
+        market.addStand(stand2);
+
+        market.removeStand(0); // Remove first stand
+        assertEquals(1, market.getAllStands().size());
+        assertEquals(stand2, market.getStand(0));
+    }
+
+    @Test
     public void testRemoveAllStands() {
         market.addStand(stand1);
         market.addStand(stand2);
@@ -78,6 +88,22 @@ public class MarketTest {
         market.removeStand(stand1); // Should not throw an error
         assertFalse(market.hasStands());
         assertNull(market.getAllStands());
+
+        market.removeStand(0); // Should not throw an error
+        assertFalse(market.hasStands());
+        assertNull(market.getAllStands());
+    }
+
+    @Test
+    public void testRemoveStandByInvalidIndex() {
+        market.addStand(stand1);
+        market.removeStand(1); // Invalid index, should not throw an error
+        assertEquals(1, market.getAllStands().size());
+        assertEquals(stand1, market.getStand(0));
+
+        market.removeStand(-1); // Negative index, should not throw an error
+        assertEquals(1, market.getAllStands().size());
+        assertEquals(stand1, market.getStand(0));
     }
 
     @Test

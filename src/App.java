@@ -144,7 +144,7 @@ public class App {
         // display success message
         System.out.println();
         System.out.println("=== Stand created successfully! ===");
-        System.out.println("New stand: " + stand);
+        System.out.println("New " + stand);
     }
 
 
@@ -154,10 +154,24 @@ public class App {
         System.out.println();
         System.out.println("=== REMOVE A STAND ===");
 
-        // if (!market.hasStands()) {
-        //     System.out.println("No stands available to remove.");
-        //     return; // nothing to remove
-        // }
+        // if no stands, nothing to remove
+        if (!market.hasStands()) {
+            System.out.println("No stands available to remove.");
+            return; // nothing to remove
+        }
+
+        // get stand index to remove
+        int maxIndex = market.getAllStands().size();
+        int userInput = Util.getIntInput("Enter stand number to remove (1-" + maxIndex + "): ", 1, maxIndex);
+        int standIndex = userInput - 1; // convert to zero-based index
+
+        // remove the stand
+        market.removeStand(standIndex);
+        
+        // display success message
+        System.out.println();
+        System.out.println("=== Stand removed successfully! ===");
+        System.out.println("Removed stand at index: " + (userInput));
     }
 
 
