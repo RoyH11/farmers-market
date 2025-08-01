@@ -52,7 +52,16 @@ public class Stand {
     }
 
     public void removeProduce(Produce item) {
+        // remove by reference
         produceList.remove(item);
+    }
+
+    public void removeProduce(int index) {
+        // remove by index
+        if (index < 0 || index >= produceList.size()) {
+            return; // nothing to remove
+        }
+        produceList.remove(index);
     }
 
     // utility methods

@@ -4,7 +4,6 @@
  * @version 1.0
  */
 
-import java.util.List;
 import produce.*;
 
 public class App {
@@ -17,8 +16,7 @@ public class App {
         System.out.println("""
                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                             << WELCOME TO THE FARMERS MARKET APP >>
-                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                            """);
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
         // initialize with some sample data
         initializeSampleMarket();
@@ -37,8 +35,7 @@ public class App {
         System.out.println("""
                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                             << Good Bye! Thank you for visiting the Farmers Market! >>
-                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                            """);
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
     }
 
@@ -50,9 +47,9 @@ public class App {
         Farmer farmer3 = new Farmer("Charlie");
 
         // create some stands with farmers
-        Stand stand1 = new Stand("Fruit Stand", farmer1);
-        Stand stand2 = new Stand("Vegetable Stand", farmer2);
-        Stand stand3 = new Stand("Mixed Produce Stand", farmer3);
+        Stand stand1 = new Stand("Elliott Farm", farmer1);
+        Stand stand2 = new Stand("NacSpace Farm", farmer2);
+        Stand stand3 = new Stand("B2B Farm", farmer3);
 
         // Stock the stands with produce
         stand1.addProduce(new Apple(1.0, 10));
@@ -83,8 +80,8 @@ public class App {
                             3. Remove a Stand
                             4. Visit a Stand
                             5. Search for Produce
-                            0. Exit
-                            """);
+                            0. Exit Farmers Market
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~""");
         
         int choice = Util.getIntInput("Enter your choice (0-5): ", 0, 5);
 
@@ -119,6 +116,8 @@ public class App {
         } else {
             System.out.println("No stands available in the market.");
         }
+        System.out.println("=======================");
+
     }
 
     
@@ -145,14 +144,13 @@ public class App {
 
         // display success message
         System.out.println();
-        System.out.println("=== Stand created successfully! ===");
-        System.out.println("New " + stand);
+        System.out.println("<< Stand created successfully! >>");
+        System.out.println(stand);
     }
 
 
     // 3rd choice: remove a stand ===============================================================
     public static void removeAStand() {
-        displayMarket(market);
         System.out.println();
         System.out.println("=== REMOVE A STAND ===");
 
@@ -162,26 +160,97 @@ public class App {
             return; // nothing to remove
         }
 
+        // display all stands
+        for (int i = 0; i < market.getAllStands().size(); i++) {
+            Stand stand = market.getStand(i);
+            System.out.println((i + 1) + ". " + stand);
+        }
+        System.out.println("0. Cancel removal");
+        System.out.println("======================");
+
         // get stand index to remove
         int maxIndex = market.getAllStands().size();
-        int userInput = Util.getIntInput("Enter stand number to remove (1-" + maxIndex + "): ", 1, maxIndex);
+        int userInput = Util.getIntInput("Enter stand number to remove (0-" + maxIndex + "): ", 0, maxIndex);
         int standIndex = userInput - 1; // convert to zero-based index
+
+        // if user chose to cancel
+        if (userInput == 0) {
+            return; // nothing to remove
+        }
 
         // remove the stand
         market.removeStand(standIndex);
         
         // display success message
         System.out.println();
-        System.out.println("=== Stand removed successfully! ===");
+        System.out.println("<<< Stand removed successfully! >>>");
         System.out.println("Removed stand at index: " + (userInput));
     }
 
 
     // 4rd choice: visit a stand (buy and stock) ===============================================================
     public static void visitAStand() {
-        displayMarket(market);
-        System.out.println();
-        System.out.println("=== VISIT A STAND ===");
+        boolean visiting = true;
+        while (visiting) {
+            System.out.println();
+            System.out.println("=== VISIT A STAND ===");
+
+            if (market.hasStands()) {
+                for (int i = 0; i < market.getAllStands().size(); i++) {
+                    Stand stand = market.getStand(i);
+                    System.out.println((i + 1) + ". " + stand);
+                }
+                System.out.println("0. Exit visit");
+                System.out.println("=====================");
+            } else {
+                System.out.println("No stands available in the market.");
+                return; // nothing to visit
+            }
+
+            // get user choice, validation handled in Util
+            // System.out.println();
+            int maxIndex = market.getAllStands().size();
+            int userInput = Util.getIntInput("Select a stand to visit (0-" + maxIndex + "): ", 0, maxIndex);
+            int standIndex = userInput - 1; // convert to zero-based index
+
+            // done visiting
+            if (userInput == 0) {
+                visiting = false;
+                continue; // exit visit
+            }
+
+            // next logic: add produce or remove produce
+            standInteraction(market.getStand(standIndex));
+        }
+    }
+
+    public static void standInteraction(Stand stand) {
+        boolean interacting = true;
+        while (interacting) {
+            System.out.println();
+            System.out.println("=== INTERACT WITH STAND ===");
+            System.out.println(stand);
+            System.out.println("""
+                            1. Add/Stock Produce
+                            2. Purchae Produce
+                            0. Exit Interaction
+                            ===========================""");
+
+            // get user choice, validation handled in Util
+            int choice = Util.getIntInput("Select an option (0-2): ", 0, 2);
+            switch (choice) {
+                case 1 -> addProduceToStand(stand);
+                case 2 -> removeProduceFromStand(stand);
+                case 0 -> {
+                    interacting = false; // exit interaction
+                    continue;
+                }
+                default -> {
+                    interacting = false; // should not reach here, but just in case
+                    continue;
+                }
+            }
+        }
     }
 
 
@@ -199,7 +268,7 @@ public class App {
                     4. Lettuce
                     5. Tomato
                     0. Exit search
-                    """);
+                    ==========================""");
 
             // get user choice, validation handled in Util
             int choice = Util.getIntInput("Select produce type (0-5): ", 0, 5);
@@ -251,8 +320,9 @@ public class App {
         boolean addingProduce = true;
         while (addingProduce) {
             System.out.println();
+            System.out.println("=== ADD PRODUCE TO STAND ===");
+            System.out.println(stand);
             System.out.println("""
-                    === ADD PRODUCE TO STAND ===
                     Available produce types:
                     1. Apple
                     2. Orange
@@ -260,9 +330,10 @@ public class App {
                     4. Lettuce
                     5. Tomato
                     0. Done adding produce
-                    """);
+                    ============================""");
 
             // get user choice, validation handled in Util
+            // System.out.println();
             int choice = Util.getIntInput("Select produce type (0-5): ", 0, 5);
 
             // done
@@ -278,24 +349,86 @@ public class App {
             // if produce already exists, just show the existing produce
             if (existingProduce != null) {
                 System.out.println();
-                System.out.println("Produce already exists in the stand: " + existingProduce);
-                continue; // skip to next iteration
+                System.out.println(produceName + " already exists in the stand.");
+                System.out.println(stand);
+                
+                // provide option to stock, Util handles validation
+                // System.out.println();
+                int stockQuantity = Util.getIntInput("Enter quantity to stock (current: " + existingProduce.getQuantity() + "): ", 0, 999);
+
+                existingProduce.stock(stockQuantity);
+                System.out.println();
+                System.out.println("<<< Stocked " + stockQuantity + " " + produceName + " to the stand! >>>");
+
+            } else {
+                // get price and quantity, validation handled in Util
+                double price = Util.getDoubleInput("Enter price per unit ($): ", 0.0, 99.99);
+
+                int quantity = Util.getIntInput("Enter quantity: ", 0, 999);
+
+                // create produce 
+                Produce produce = createProduce(choice, price, quantity);
+                stand.addProduce(produce);
+                System.out.println();
+                System.out.println("<<< Added " + produce.getName() + " to the stand! >>>");
             }
 
-            // get price and quantity, validation handled in Util
-            double price = Util.getDoubleInput("Enter price per unit ($): ", 0.0, 99.99);
+            // display current produce in the stand
+            System.out.println(stand);
+        }
+    }
 
-            int quantity = Util.getIntInput("Enter quantity: ", 0, 999);
-
-            // create produce 
-            Produce produce = createProduce(choice, price, quantity);
-            stand.addProduce(produce);
+    public static void removeProduceFromStand(Stand stand) {
+        boolean removingProduce = true;
+        while (removingProduce) {
             System.out.println();
-            System.out.println("=== Added " + produce.getName() + " to the stand ===");
+            System.out.println("=== PURCHASE PRODUCE FROM STAND ===");
+            System.out.println(stand);
+            
+            if (!stand.hasProduce()) {
+                System.out.println("No produce available in this stand.");
+                return; // nothing to remove
+            }
+
+            // display all produce in the stand
+            for (int i = 0; i < stand.getProduceList().size(); i++) {
+                Produce produce = stand.getProduceList().get(i);
+                System.out.println((i + 1) + ". " + produce);
+            }
+            System.out.println("0. Done purchase produce");
+            System.out.println("===================================");
+
+            // get user choice, validation handled in Util
+            int maxIndex = stand.getProduceList().size();
+            // System.out.println();
+            int userInput = Util.getIntInput("Select produce to purchase (0-" + maxIndex + "): ", 0, maxIndex);
+            int produceIndex = userInput - 1; // convert to zero-based index
+
+            // done removing
+            if (userInput == 0) {
+                removingProduce = false; // done removing produce
+                continue;
+            }
+
+            // ask how many units to remove
+            int currentQuantity = stand.getProduceList().get(produceIndex).getQuantity();
+            int purchaseQuantity = Util.getIntInput("Enter quantity to purchase (current: " + currentQuantity + "): ", 0, currentQuantity);
+
+            // remove the produce
+            Produce produceToRemove = stand.getProduceList().get(produceIndex);
+            produceToRemove.buy(purchaseQuantity);
+
+            // if quantity is zero, remove the produce from the stand
+            if (produceToRemove.getQuantity() == 0) {
+                stand.removeProduce(produceIndex);
+            }
+
+            // display success message
+            System.out.println();
+            System.out.println("<<< Purchased " + purchaseQuantity + " " + produceToRemove.getName() + " from the stand! >>>");
 
             // display current produce in the stand
-            List<Produce> currentProduces = stand.getProduceList();
-            System.out.println("Current produce in the stand: " + currentProduces);
+            System.out.println(stand);
         }
     }
 

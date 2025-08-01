@@ -93,9 +93,12 @@ I set up the coding environment in VS Code, for the JUnit tests I used the JUnit
     - implemented produce search functionality
     - standardized terminal output for better user experience (println before each menu/output)
 
-- 8/1 TODO: 
-    - implement visit a stand functionality
-        - add produce to a stand
-        - remove produce from a stand
-    - implement search for produce functionality
+- 8/1 2:40 pm 
+    - implemented visit a stand functionality
+        - view produce in a stand
+        - add / stock produce in a stand
+        - purchase produce from a stand
+        - exit visit functionality
+    - beautified terminal output
+
     
