@@ -41,20 +41,56 @@ public class App {
 
     }
 
+
+    public static void initializeSampleMarket() {
+        // create some farmers
+        Farmer farmer1 = new Farmer("Alice");
+        Farmer farmer2 = new Farmer("Bob");
+        Farmer farmer3 = new Farmer("Charlie");
+
+        // create some stands with farmers
+        Stand stand1 = new Stand("Fruit Stand", farmer1);
+        Stand stand2 = new Stand("Vegetable Stand", farmer2);
+        Stand stand3 = new Stand("Mixed Produce Stand", farmer3);
+
+        // Stock the stands with produce
+        stand1.addProduce(new Apple(1.0, 10));
+        stand1.addProduce(new Orange(1.5, 20));
+
+        stand2.addProduce(new Carrot(0.5, 30));
+        stand2.addProduce(new Lettuce(0.75, 25));
+        stand2.addProduce(new Tomato(0.6, 15));
+
+        stand3.addProduce(new Apple(1.2, 5));
+        stand3.addProduce(new Carrot(0.8, 10));
+
+        // Add stands to the market
+        market.addStand(stand1);
+        market.addStand(stand2);
+        market.addStand(stand3);
+    }
+
+
     public static boolean showMainMenu() {
         System.out.println();
         System.out.println( """
                             === FARMERS MARKET MENU ===
                             1. View Farmers Market
                             2. Create New Stand
+                            3. Remove a Stand
+                            4. Visit a Stand
+                            5. Search for Produce
                             0. Exit
                             """);
         
-        int choice = Util.getIntInput("Enter your choice (0-2): ", 0, 2);
+        int choice = Util.getIntInput("Enter your choice (0-5): ", 0, 5);
 
         switch (choice) {
             case 1 -> displayMarket(market);
             case 2 -> createNewStand();
+            case 3 -> removeAStand();
+            case 4 -> visitAStand();
+            case 5 -> searchForProduce();
             case 0 -> {
                 return false; // exist the program
             }
@@ -65,7 +101,25 @@ public class App {
             
         return true; // continue running
     }
+    
+    
+    // 1st choice ===============================================================
+    public static void displayMarket(Market market) {
+        System.out.println();
+        System.out.println("=== Market Overview ===");
+                
+        if (market.hasStands()) {
+            for (int i = 0; i < market.getAllStands().size(); i++) {
+                Stand stand = market.getStand(i);
+                System.out.println((i + 1) + ". " + stand);
+            }
+        } else {
+            System.out.println("No stands available in the market.");
+        }
+    }
 
+    
+    // 2nd choice ===============================================================
     public static void createNewStand() {
         System.out.println();
         System.out.println("=== CREATE NEW STAND ===");
@@ -90,6 +144,34 @@ public class App {
         System.out.println();
         System.out.println("=== Stand created successfully! ===");
         System.out.println("New stand: " + stand);
+    }
+
+
+    // 3rd choice ===============================================================
+    public static void removeAStand() {
+        displayMarket(market);
+        System.out.println();
+        System.out.println("=== REMOVE A STAND ===");
+
+        // if (!market.hasStands()) {
+        //     System.out.println("No stands available to remove.");
+        //     return; // nothing to remove
+        // }
+    }
+
+
+    // 4rd choice ===============================================================
+    public static void visitAStand() {
+        displayMarket(market);
+        System.out.println();
+        System.out.println("=== VISIT A STAND ===");
+    }
+
+
+    // 5th choice ===============================================================
+    public static void searchForProduce() {
+        System.out.println();
+        System.out.println("=== SEARCH FOR PRODUCE ===");
     }
 
     public static void addProduceToStand(Stand stand) {
@@ -174,45 +256,5 @@ public class App {
         }; 
     }
 
-    public static void initializeSampleMarket() {
-        // create some farmers
-        Farmer farmer1 = new Farmer("Alice");
-        Farmer farmer2 = new Farmer("Bob");
-        Farmer farmer3 = new Farmer("Charlie");
-
-        // create some stands with farmers
-        Stand stand1 = new Stand("Fruit Stand", farmer1);
-        Stand stand2 = new Stand("Vegetable Stand", farmer2);
-        Stand stand3 = new Stand("Mixed Produce Stand", farmer3);
-
-        // Stock the stands with produce
-        stand1.addProduce(new Apple(1.0, 10));
-        stand1.addProduce(new Orange(1.5, 20));
-
-        stand2.addProduce(new Carrot(0.5, 30));
-        stand2.addProduce(new Lettuce(0.75, 25));
-        stand2.addProduce(new Tomato(0.6, 15));
-
-        stand3.addProduce(new Apple(1.2, 5));
-        stand3.addProduce(new Carrot(0.8, 10));
-
-        // Add stands to the market
-        market.addStand(stand1);
-        market.addStand(stand2);
-        market.addStand(stand3);
-    }
-
-    public static void displayMarket(Market market) {
-        System.out.println();
-        System.out.println("=== Market Overview ===");
-                
-        if (market.hasStands()) {
-            for (int i = 0; i < market.getAllStands().size(); i++) {
-                Stand stand = market.getStand(i);
-                System.out.println((i + 1) + ". " + stand);
-            }
-        } else {
-            System.out.println("No stands available in the market.");
-        }
-    }
+    
 }
