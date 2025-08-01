@@ -134,4 +134,5 @@ This is a small OOP-focused Java project simulating a farmers market with multip
         - exit visit functionality
     - beautified terminal output
 
-    
+- 8/1/2025 3:45 pm 
+    - refactored findProduceByName method to Stand class
