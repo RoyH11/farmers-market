@@ -75,7 +75,9 @@ public class App {
     public static boolean showMainMenu() {
         System.out.println();
         System.out.println( """
-                            === FARMERS MARKET MENU ===
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~
+                            << FARMERS MARKET MENU >>
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~
                             1. View Farmers Market
                             2. Create New Stand
                             3. Remove a Stand
@@ -104,7 +106,7 @@ public class App {
     }
     
     
-    // 1st choice ===============================================================
+    // 1st choice: show all stands and details ===============================================================
     public static void displayMarket(Market market) {
         System.out.println();
         System.out.println("=== Market Overview ===");
@@ -120,7 +122,7 @@ public class App {
     }
 
     
-    // 2nd choice ===============================================================
+    // 2nd choice: create a new stand ===============================================================
     public static void createNewStand() {
         System.out.println();
         System.out.println("=== CREATE NEW STAND ===");
@@ -148,7 +150,7 @@ public class App {
     }
 
 
-    // 3rd choice ===============================================================
+    // 3rd choice: remove a stand ===============================================================
     public static void removeAStand() {
         displayMarket(market);
         System.out.println();
@@ -175,7 +177,7 @@ public class App {
     }
 
 
-    // 4rd choice ===============================================================
+    // 4rd choice: visit a stand (buy and stock) ===============================================================
     public static void visitAStand() {
         displayMarket(market);
         System.out.println();
@@ -183,18 +185,74 @@ public class App {
     }
 
 
-    // 5th choice ===============================================================
+    // 5th choice: search for a produce ===============================================================
     public static void searchForProduce() {
-        System.out.println();
-        System.out.println("=== SEARCH FOR PRODUCE ===");
+        boolean searching = true;
+        while (searching) {
+            System.out.println();
+            System.out.println("""
+                    === SEARCH FOR PRODUCE ===
+                    Available produce types:
+                    1. Apple
+                    2. Orange
+                    3. Carrot
+                    4. Lettuce
+                    5. Tomato
+                    0. Exit search
+                    """);
+
+            // get user choice, validation handled in Util
+            int choice = Util.getIntInput("Select produce type (0-5): ", 0, 5);
+
+            // done
+            if (choice == 0) {
+                searching = false; // done searching
+                continue;
+            }
+
+            // get produce name
+            String produceName = getProduceName(choice);
+
+            // desplay search results
+            displaySearchResults(produceName);
+        }
     }
 
-    public static void addProduceToStand(Stand stand) {
+    public static void displaySearchResults(String produceName) {
         System.out.println();
-        System.out.println("=== ADD PRODUCE TO STAND ===");
+        System.out.println("=== SEARCH RESULTS FOR " + produceName.toUpperCase() + " ===");
+
+        boolean found = false;
+
+        // search through all stands
+        for (int i = 0; i < market.getAllStands().size(); i++) {
+            Stand stand = market.getStand(i);
+            Produce produce = findProduceByName(stand, produceName);
+
+            // only display if produce is found
+            if (produce != null) {
+                found = true;
+                System.out.println(String.format("%d. %-30s %-20s %s", 
+                                                (i + 1),
+                                                "Stand: " + stand.getName(), 
+                                                "Farmer: " + stand.getFarmer().getName(), 
+                                                "Produce: " + produce.toString()));
+            }
+        }
+
+        if (!found) {
+            System.out.println(produceName + " not available in any stand.");
+        }
+    }
+
+
+    public static void addProduceToStand(Stand stand) {
+        
         boolean addingProduce = true;
         while (addingProduce) {
+            System.out.println();
             System.out.println("""
+                    === ADD PRODUCE TO STAND ===
                     Available produce types:
                     1. Apple
                     2. Orange
@@ -221,7 +279,6 @@ public class App {
             if (existingProduce != null) {
                 System.out.println();
                 System.out.println("Produce already exists in the stand: " + existingProduce);
-                System.out.println();
                 continue; // skip to next iteration
             }
 
@@ -234,12 +291,11 @@ public class App {
             Produce produce = createProduce(choice, price, quantity);
             stand.addProduce(produce);
             System.out.println();
-            System.out.println("Added " + produce.getName() + " to the stand.");
+            System.out.println("=== Added " + produce.getName() + " to the stand ===");
 
             // display current produce in the stand
             List<Produce> currentProduces = stand.getProduceList();
             System.out.println("Current produce in the stand: " + currentProduces);
-            System.out.println();
         }
     }
 

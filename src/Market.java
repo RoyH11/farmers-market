@@ -58,8 +58,6 @@ public class Market {
     // utility methods
     public boolean hasStands() {
         return !stands.isEmpty();
-    }
-
-    
+    }    
 
 }
