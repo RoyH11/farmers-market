@@ -46,6 +46,7 @@ This is a small OOP-focused Java project simulating a farmers market with multip
     ```
 
 4. The `compile_and_run.sh` script compiles the Java files and runs the main class.
+
     Linux:
 
     ```bash
