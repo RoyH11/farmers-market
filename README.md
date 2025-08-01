@@ -21,9 +21,42 @@ This is a small OOP-focused Java project simulating a farmers market with multip
 - The market has search capabilities to find a specific piece of produce and return a list of Farmers providing along with their location in the market.
 - Buying produce reduces counts, which are then reflected accurately in the search.
 
-## Environment Setup
+## Setup and Running Instructions
 
-I set up the coding environment in VS Code, for the JUnit tests I used the JUnit 5 library. I downloaded [junit-platform-console-standalone-1.13.4.jar](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.13.4/) and manually placed it in the `lib` folder. The `build_and_run.sh` script compiles the Java files and runs the main class.
+1. JUNIT set up
+
+    I set up the coding environment in VS Code, for the JUnit tests I used the JUnit 5 library. I downloaded `junit-platform-console-standalone-1.13.4.jar` from this [link](https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.13.4/) and manually placed it in the `lib` folder. 
+
+2. Java version requirement
+
+    This project is developed using **Java 21**. I recommend using at least **Java 17** or higher to ensure compatibility with the features used in this project. For java installation, you can use Adoptium from this [link](https://adoptium.net/temurin/releases/?version=17), or any other Java distribution of your choice.
+    
+3. The `test.sh` script runs the JUnit tests. 
+
+    Linux: 
+
+    ```bash
+    ./test.sh
+    ```
+
+    Windows:
+
+    ```shell
+    .\test.ps1
+    ```
+
+4. The `compile_and_run.sh` script compiles the Java files and runs the main class.
+    Linux:
+
+    ```bash
+    ./compile_and_run.sh
+    ```
+
+    Windows:
+
+    ```shell
+    .\compile_and_run.ps1
+    ```
 
 ## Progress Log
 
